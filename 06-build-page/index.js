@@ -48,6 +48,7 @@ async function buildPage() {
     await copyDir(
       path.join(__dirname, 'assets'),
       path.join(outputFolderPath, 'assets'),
+      true,
     );
 
     console.log('Build successful! Check the project-dist folder.');

@@ -3,7 +3,7 @@ const path = require('path');
 const sourceFolder = path.join(__dirname, 'files');
 const destinationFolder = path.join(__dirname, 'files-copy');
 
-const copyDir = async (src, dest) => {
+const copyDir = async (src, dest, isRecursive) => {
   try {
     await fs.mkdir(dest, { recursive: true });
 
@@ -22,8 +22,8 @@ const copyDir = async (src, dest) => {
         const destPath = path.join(dest, file);
         const stats = await fs.stat(srcPath);
 
-        if (stats.isDirectory()) {
-          await copyDir(srcPath, destPath);
+        if (stats.isDirectory() && isRecursive) {
+          await copyDir(srcPath, destPath, isRecursive);
         } else {
           await fs.copyFile(srcPath, destPath);
         }
